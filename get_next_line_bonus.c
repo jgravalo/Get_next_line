@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgravalo <jgravalo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:40:27 by jgravalo          #+#    #+#             */
-/*   Updated: 2023/02/17 21:09:29 by jgravalo         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:14:12 by jgravalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <unistd.h>
 
 char	*maketext(char *text, int fd)
@@ -94,18 +94,14 @@ char	*modifytext(char *text)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	**text;
+	static char	*text;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	if (!text[fd - 3])
-	{
-		text = (char **)malloc(sizeof(char *) * (fd - 2) + 8);
-	}
-	text[fd - 3] = maketext(text[fd - 3], fd);
-	if (!text[fd - 3])
+	text = maketext(text, fd);
+	if (!text)
 		return (NULL);
-	line = makeline(text[fd - 3]);
-	text[fd - 3] = modifytext(text[fd - 3]);
+	line = makeline(text);
+	text = modifytext(text);
 	return (line);
 }
