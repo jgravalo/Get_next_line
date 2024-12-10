@@ -105,3 +105,17 @@ char	*get_next_line(int fd)
 	text = modifytext(text);
 	return (line);
 }
+/* 
+#include<stdio.h>
+int main()
+{
+	int fd = open("test.txt", O_RDONLY);
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		char *s = get_next_line(fd);
+		printf("gnl = <%s>\n", s);
+		free(s);
+	}
+	return (0);
+} */

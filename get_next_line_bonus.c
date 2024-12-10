@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 
 char	*maketext(char *text, int fd)
@@ -105,3 +105,21 @@ char	*get_next_line(int fd)
 	text[fd] = modifytext(text[fd]);
 	return (line);
 }
+/* 
+#include<stdio.h>
+int main()
+{
+	int fd = 0;//open("test.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		char *s = get_next_line(fd);
+		printf("gnl1 = <%s>\n", s);
+		free(s);
+		char *s2 = get_next_line(fd2);
+		printf("gnl2 = <%s>\n", s2);
+		free(s2);
+	}
+	return (0);
+} */
