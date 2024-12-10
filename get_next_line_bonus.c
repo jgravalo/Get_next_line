@@ -94,14 +94,14 @@ char	*modifytext(char *text)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*text;
+	static char	*text[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= 2147483648)
 		return (0);
-	text = maketext(text, fd);
-	if (!text)
+	text[fd] = maketext(text[fd], fd);
+	if (!text[fd])
 		return (NULL);
-	line = makeline(text);
-	text = modifytext(text);
+	line = makeline(text[fd]);
+	text[fd] = modifytext(text[fd]);
 	return (line);
 }
